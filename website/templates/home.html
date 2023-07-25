@@ -2,12 +2,58 @@
 
 {% block content %}
 
-<div class="col-md-6 offset-md-3">
+<div class="col-md-10 offset-md-1">
 
     <!-- {% if user.is_authenticated %} -->
 
-    <h1>Hello World! </h1>
+    <h1>Records...</h1>
+
+    <a href="{% url 'add_record' %}" style="float: right;" class="btn btn-primary">Add New Record</a>
+            
+
+    <table class="table table-striped table-hover">
+        <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">First Name</th>
+        <th scope="col">Last Name</th>
+        <th scope="col">Email</th>
+        <th scope="col">Address</th>
+        <th scope="col">Phone</th>
+        <th scope="col">City</th>
+        <th scope="col">State</th>
+        <th scope="col">Zipcode</th>
+        <th scope="col">Created Date</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+        {% if records %}
+            {% for record in records %}
+            <tr>
+                <th scope="row">{{ record.id }}</th>
+                <td>{{ record.first_name }}</td>
+                <td>{{ record.last_name }}</td>
+                <td>{{ record.email }}</td>
+                <td>{{ record.address }}</td>
+                <td>{{ record.phone }}</td>
+                <td>{{ record.city }}</td>
+                <td>{{ record.state }}</td>
+                <td>{{ record.zipcode }}</td>
+                <td>{{ record.created_at }}</td>
+                <td><a href="{% url 'record' record.id %}">view</a></td>
+            </tr>
+            {% endfor %}
+        {% else %}
+            <tr>
+                <td colspan="11">No records available ...</td>
+            </tr>
+        {% endif %}
     
+    </tbody>
+  
+    </table>
+
     <!-- {% endif %} -->
 
 </div>
